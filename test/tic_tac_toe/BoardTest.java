@@ -72,4 +72,15 @@ public class BoardTest {
                             "   |   |  ";
         assertEquals(board.buildBoard(), emptyBoard);
     }
+
+    @Test
+    public void shouldBuildBoardWithFirstCellMarkedWhenFirstCellIsMarked() {
+        String firstCellMarked = " X |   |   \n" +
+                                 "-----------\n" +
+                                 "   |   |   \n" +
+                                 "-----------\n" +
+                                 "   |   |  ";
+        board.markCell(1);
+        assertEquals(board.buildBoard(), firstCellMarked);
+    }
 }
