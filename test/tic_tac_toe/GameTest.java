@@ -26,17 +26,17 @@ public class GameTest {
     public void shouldDrawBoardWhenGameStarts() {
         game.start();
 
-        verify(board).draw();
+        verify(board, atLeastOnce()).draw();
     }
 
     @Test
-    public void shouldPromptPlayerAfterDrawingBoard() {
+    public void shouldGetPlayersInputAfterDrawingBoard() {
         game.start();
 
         InOrder inOrder = inOrder(board, player);
 
         inOrder.verify(board).draw();
-        inOrder.verify(player).prompt();
+        inOrder.verify(player).getPlayersInput();
     }
 
     @Test
@@ -46,5 +46,19 @@ public class GameTest {
         game.start();
 
         verify(board).markCell("1");
+    }
+
+    @Test
+    public void shouldDrawBoardAgainAfterMarkingBoard() {
+        when(player.getPlayersInput()).thenReturn("1");
+
+        game.start();
+
+        InOrder inOrder = inOrder(board, player);
+
+        inOrder.verify(board, times(1)).draw();
+        inOrder.verify(player).getPlayersInput();
+        inOrder.verify(board, atLeastOnce()).draw();
+
     }
 }

@@ -12,6 +12,10 @@ public class Board {
 
     public Board(PrintStream printStream) {
         this.printStream = printStream;
+        initializeGameBoard();
+    }
+
+    private void initializeGameBoard() {
         this.gameBoard = new String[9];
         for (int i = 0; i < 9; i++) {
             gameBoard[i] = " ";
@@ -28,6 +32,14 @@ public class Board {
     }
 
     public void markCell(String s) {
-        gameBoard[Integer.parseInt(s) - 1] = "X";
+        gameBoard[normalizeUserInput(s)] = "X";
+    }
+
+    private int normalizeUserInput(String s) {
+        return parseIntFromUserInput(s) - 1;
+    }
+
+    private int parseIntFromUserInput(String s) {
+        return Integer.parseInt(s);
     }
 }

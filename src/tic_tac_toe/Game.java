@@ -15,7 +15,7 @@ public class Game {
 
     public void start() {
         board.draw();
-        player.prompt();
-        board.markCell("1");
+        board.markCell(player.getPlayersInput());
+        board.draw();
     }
 }
