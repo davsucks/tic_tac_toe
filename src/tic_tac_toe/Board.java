@@ -40,4 +40,12 @@ public class Board {
     private int normalizeUserInput(int userInput) {
         return userInput - 1;
     }
+
+    public String buildBoard() {
+        return " " + gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2] + " \n" +
+                "-----------\n" +
+                " " + gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5] + " \n" +
+                "-----------\n" +
+                " " + gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8];
+    }
 }

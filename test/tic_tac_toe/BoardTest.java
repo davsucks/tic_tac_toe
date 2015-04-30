@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -59,5 +61,15 @@ public class BoardTest {
                 "   |   |   \n" +
                 "-----------\n" +
                 "   |   |  "));
+    }
+
+    @Test
+    public void shouldBuildEmptyBoardWhenNoCellsAreMarked() {
+        String emptyBoard = "   |   |   \n" +
+                            "-----------\n" +
+                            "   |   |   \n" +
+                            "-----------\n" +
+                            "   |   |  ";
+        assertEquals(board.buildBoard(), emptyBoard);
     }
 }
