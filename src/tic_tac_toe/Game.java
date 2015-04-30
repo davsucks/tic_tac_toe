@@ -6,12 +6,15 @@ package tic_tac_toe;
 public class Game {
 
     private final Board board;
+    private Player player;
 
-    public Game(Board board) {
+    public Game(Board board, Player player) {
         this.board = board;
+        this.player = player;
     }
 
     public void start() {
         board.draw();
+        player.prompt();
     }
 }
