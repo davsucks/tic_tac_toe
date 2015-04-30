@@ -7,6 +7,7 @@ Stories
 Draw the board
 --------------
 When the game starts, draw a board that looks like this:
+
        |   |
      ---------
        |   |
