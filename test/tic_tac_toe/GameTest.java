@@ -72,7 +72,7 @@ public class GameTest {
     }
 
     @Test
-    public void shouldAlternateMarkingPlayerOneAndPlayerTwosSymbols() {
+    public void shouldAlternateBetweenPromptingPlayerOneAndPlayerTwo() {
         when(playerOne.getPlayersInput()).thenReturn(1);
         when(playerTwo.getPlayersInput()).thenReturn(2);
 
