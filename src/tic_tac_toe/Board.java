@@ -6,23 +6,23 @@ import java.io.PrintStream;
  * Created by dsucksto on 4/30/15.
  */
 public class Board {
-    private String[] gameBoard;
+    private char[] gameBoard;
 
     public Board() {
         initializeGameBoard();
     }
 
     private void initializeGameBoard() {
-        this.gameBoard = new String[9];
+        this.gameBoard = new char[9];
         for (int i = 0; i < 9; i++) {
-            gameBoard[i] = " ";
+            gameBoard[i] = ' ';
         }
     }
 
     public void markCell(int cell, char symbol) {
         int index = normalizeUserInput(cell);
         if (index >= 0 && index < 9) {
-            gameBoard[index] = "X";
+            gameBoard[index] = symbol;
         }
     }
 

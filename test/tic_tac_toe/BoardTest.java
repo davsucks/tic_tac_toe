@@ -47,4 +47,15 @@ public class BoardTest {
                             "   |   |  ";
         assertEquals(board.buildBoard(), emptyBoard);
     }
+
+    @Test
+    public void shouldMarkCellWithSymbolGiven() {
+        String finalBoard = "   | O |   \n" +
+                            "-----------\n" +
+                            "   |   |   \n" +
+                            "-----------\n" +
+                            "   |   |  ";
+        board.markCell(2, 'O');
+        assertEquals(board.buildBoard(), finalBoard);
+    }
 }
