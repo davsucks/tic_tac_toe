@@ -19,11 +19,13 @@ public class Board {
         }
     }
 
-    public void markCell(int cell, char symbol) {
+    public boolean markCell(int cell, char symbol) {
         int index = normalizeUserInput(cell);
-        if (index >= 0 && index < 9) {
+        if (index >= 0 && index < 9 && gameBoard[index] == ' ') {
             gameBoard[index] = symbol;
+            return true;
         }
+        return false;
     }
 
     private int normalizeUserInput(int userInput) {
