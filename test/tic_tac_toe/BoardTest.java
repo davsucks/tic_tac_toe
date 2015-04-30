@@ -3,11 +3,8 @@ package tic_tac_toe;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -30,14 +27,14 @@ public class BoardTest {
                                  "   |   |   \n" +
                                  "-----------\n" +
                                  "   |   |  ";
-        board.markCell(1);
+        board.markCell(1, 'X');
         assertEquals(board.buildBoard(), firstCellMarked);
     }
 
     @Test
     public void shouldLetUserChooseInvalidCell() {
         String initialBoard = board.buildBoard();
-        board.markCell(100);
+        board.markCell(100, 'X');
         assertEquals(board.buildBoard(), initialBoard);
     }
 

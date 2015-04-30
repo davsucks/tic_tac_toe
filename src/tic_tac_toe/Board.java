@@ -19,7 +19,7 @@ public class Board {
         }
     }
 
-    public void markCell(int cell) {
+    public void markCell(int cell, char symbol) {
         int index = normalizeUserInput(cell);
         if (index >= 0 && index < 9) {
             gameBoard[index] = "X";

@@ -49,11 +49,12 @@ public class GameTest {
 
     @Test
     public void shouldMarkBoardWhenUserDecidesOnACell() {
+        when(playerOne.getSymbol()).thenReturn('X');
         when(playerOne.getPlayersInput()).thenReturn(1);
 
         game.start();
 
-        verify(board).markCell(1);
+        verify(board).markCell(1, 'X');
     }
 
     @Test
@@ -74,12 +75,27 @@ public class GameTest {
     @Test
     public void shouldAlternateBetweenPromptingPlayerOneAndPlayerTwo() {
         when(playerOne.getPlayersInput()).thenReturn(1);
+        when(playerOne.getSymbol()).thenReturn('X');
         when(playerTwo.getPlayersInput()).thenReturn(2);
+        when(playerTwo.getSymbol()).thenReturn('O');
 
         game.start();
 
         InOrder inOrder = inOrder(board);
-        inOrder.verify(board).markCell(1);
-        inOrder.verify(board).markCell(2);
+        inOrder.verify(board).markCell(1, 'X');
+        inOrder.verify(board).markCell(2, 'O');
+    }
+
+    @Test
+    public void shouldUseEachPlayersSymbolInMarkingCells() {
+        when(playerOne.getPlayersInput()).thenReturn(1);
+        when(playerOne.getSymbol()).thenReturn('X');
+        when(playerTwo.getPlayersInput()).thenReturn(2);
+        when(playerTwo.getSymbol()).thenReturn('O');
+
+        game.start();
+
+        verify(board).markCell(1, 'X');
+        verify(board).markCell(2, 'O');
     }
 }
