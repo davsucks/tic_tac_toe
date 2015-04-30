@@ -8,18 +8,21 @@ import java.io.PrintStream;
 public class Game {
 
     private final Board board;
-    private Player player;
+    private Player playerOne;
+    private Player playerTwo;
     private PrintStream printStream;
 
-    public Game(Board board, Player player, PrintStream printStream) {
+    public Game(Board board, Player playerOne, PrintStream printStream, Player playerTwo) {
         this.board = board;
-        this.player = player;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
         this.printStream = printStream;
     }
 
     public void start() {
         printStream.println(board.buildBoard());
-        board.markCell(player.getPlayersInput());
+        board.markCell(playerOne.getPlayersInput());
         printStream.println(board.buildBoard());
+        board.markCell(playerTwo.getPlayersInput());
     }
 }

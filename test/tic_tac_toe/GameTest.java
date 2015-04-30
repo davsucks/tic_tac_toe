@@ -13,17 +13,19 @@ import static org.mockito.Mockito.*;
  */
 public class GameTest {
 
-    private Player player;
     private Board board;
-    private Game game;
     private PrintStream printStream;
+    private Player playerOne;
+    private Player playerTwo;
+    private Game game;
 
     @Before
     public void setUp() throws Exception {
-        player = mock(Player.class);
         board = mock(Board.class);
         printStream = mock(PrintStream.class);
-        game = new Game(board, player, printStream);
+        playerOne = mock(Player.class);
+        playerTwo = mock(Player.class);
+        game = new Game(board, playerOne, printStream, playerTwo);
     }
 
     @Test
@@ -39,15 +41,15 @@ public class GameTest {
         when(board.buildBoard()).thenReturn("Board");
         game.start();
 
-        InOrder inOrder = inOrder(printStream, player);
+        InOrder inOrder = inOrder(printStream, playerOne);
 
         inOrder.verify(printStream).println("Board");
-        inOrder.verify(player).getPlayersInput();
+        inOrder.verify(playerOne).getPlayersInput();
     }
 
     @Test
     public void shouldMarkBoardWhenUserDecidesOnACell() {
-        when(player.getPlayersInput()).thenReturn(1);
+        when(playerOne.getPlayersInput()).thenReturn(1);
 
         game.start();
 
@@ -56,16 +58,28 @@ public class GameTest {
 
     @Test
     public void shouldDrawBoardAgainAfterMarkingBoard() {
-        when(player.getPlayersInput()).thenReturn(1);
+        when(playerOne.getPlayersInput()).thenReturn(1);
         when(board.buildBoard()).thenReturn("Board");
 
         game.start();
 
-        InOrder inOrder = inOrder(printStream, player);
+        InOrder inOrder = inOrder(printStream, playerOne);
 
         inOrder.verify(printStream, times(1)).println("Board");
-        inOrder.verify(player).getPlayersInput();
+        inOrder.verify(playerOne).getPlayersInput();
         inOrder.verify(printStream, atLeastOnce()).println("Board");
 
+    }
+
+    @Test
+    public void shouldAlternateMarkingPlayerOneAndPlayerTwosSymbols() {
+        when(playerOne.getPlayersInput()).thenReturn(1);
+        when(playerTwo.getPlayersInput()).thenReturn(2);
+
+        game.start();
+
+        InOrder inOrder = inOrder(board);
+        inOrder.verify(board).markCell(1);
+        inOrder.verify(board).markCell(2);
     }
 }
