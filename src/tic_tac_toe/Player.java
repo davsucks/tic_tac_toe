@@ -18,8 +18,8 @@ public class Player {
         printStream.println("Please input a number between 1 and 9:");
     }
 
-    public String getPlayersInput() {
+    public int getPlayersInput() {
         prompt();
-        return userInputStream.getUserInput();
+        return userInputStream.getIntFromUser();
     }
 }

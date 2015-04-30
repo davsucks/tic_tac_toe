@@ -3,7 +3,6 @@ package tic_tac_toe;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.mockito.Matchers.contains;
@@ -29,15 +28,15 @@ public class PlayerTest {
 
     @Test
     public void shouldPromptUserForInputWhenCollectingMove() {
-        when(userInputStream.getUserInput()).thenReturn("");
+        when(userInputStream.getIntFromUser()).thenReturn(0);
 
         player.getPlayersInput();
-        verify(userInputStream).getUserInput();
+        verify(userInputStream).getIntFromUser();
     }
 
     @Test
     public void shouldInstructUserHowToInput() {
-        when(userInputStream.getUserInput()).thenReturn("");
+        when(userInputStream.getIntFromUser()).thenReturn(0);
 
         player.prompt();
         verify(printStream).println(contains("Please input"));

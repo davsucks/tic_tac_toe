@@ -41,16 +41,16 @@ public class GameTest {
 
     @Test
     public void shouldMarkBoardWhenUserDecidesOnACell() {
-        when(player.getPlayersInput()).thenReturn("1");
+        when(player.getPlayersInput()).thenReturn(1);
 
         game.start();
 
-        verify(board).markCell("1");
+        verify(board).markCell(1);
     }
 
     @Test
     public void shouldDrawBoardAgainAfterMarkingBoard() {
-        when(player.getPlayersInput()).thenReturn("1");
+        when(player.getPlayersInput()).thenReturn(1);
 
         game.start();
 

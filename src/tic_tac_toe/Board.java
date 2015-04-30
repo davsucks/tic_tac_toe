@@ -1,7 +1,6 @@
 package tic_tac_toe;
 
 import java.io.PrintStream;
-import java.util.List;
 
 /**
  * Created by dsucksto on 4/30/15.
@@ -31,15 +30,11 @@ public class Board {
                 " " + gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
 
-    public void markCell(String s) {
-        gameBoard[normalizeUserInput(s)] = "X";
+    public void markCell(int cell) {
+        gameBoard[normalizeUserInput(cell)] = "X";
     }
 
-    private int normalizeUserInput(String s) {
-        return parseIntFromUserInput(s) - 1;
-    }
-
-    private int parseIntFromUserInput(String s) {
-        return Integer.parseInt(s);
+    private int normalizeUserInput(int userInput) {
+        return userInput - 1;
     }
 }

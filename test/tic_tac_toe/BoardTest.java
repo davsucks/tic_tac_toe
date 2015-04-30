@@ -34,7 +34,7 @@ public class BoardTest {
         PrintStream printStream = mock(PrintStream.class);
         Board board = new Board(printStream);
 
-        board.markCell("1");
+        board.markCell(1);
         board.draw();
         verify(printStream).println(contains(
                 " X |   |   \n" +
