@@ -15,17 +15,18 @@ import static org.mockito.Mockito.when;
  */
 public class PlayerTest {
 
+    private UserInputStream userInputStream;
+    private Player player;
+
     @Before
     public void setUp() {
-
+        userInputStream = mock(UserInputStream.class);
+        player = new Player(userInputStream);
     }
 
     @Test
     public void shouldPromptUserForInput() throws IOException {
-        UserInputStream userInputStream = mock(UserInputStream.class);
         when(userInputStream.getUserInput()).thenReturn("");
-
-        Player player = new Player(userInputStream);
 
         player.prompt();
         verify(userInputStream).getUserInput();
