@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 public class GameTest {
 
     @Test
-    public void shouldDrawBoardWhenGameStarts() throws Exception {
+    public void shouldDrawBoardWhenGameStarts() {
         Board board = mock(Board.class);
 
         Game game = new Game(board);
