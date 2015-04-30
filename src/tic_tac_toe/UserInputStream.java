@@ -22,7 +22,7 @@ public class UserInputStream {
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         } catch (NumberFormatException e) {
-            System.out.println("NumberFormatException: " + e);
+            System.out.println("That's not a number!");
         }
         return intFromUser;
     }
