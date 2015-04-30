@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by dsucksto on 4/30/15.
@@ -39,5 +37,14 @@ public class GameTest {
 
         inOrder.verify(board).draw();
         inOrder.verify(player).prompt();
+    }
+
+    @Test
+    public void shouldMarkBoardWhenUserDecidesOnACell() {
+        when(player.getPlayersInput()).thenReturn("1");
+
+        game.start();
+
+        verify(board).markCell("1");
     }
 }

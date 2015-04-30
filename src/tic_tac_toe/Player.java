@@ -16,6 +16,10 @@ public class Player {
 
     public void prompt() {
         printStream.println("Please input a number between 1 and 9:");
-        String userInput = userInputStream.getUserInput();
+    }
+
+    public String getPlayersInput() {
+        prompt();
+        return userInputStream.getUserInput();
     }
 }

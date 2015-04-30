@@ -28,10 +28,10 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldPromptUserForInput() throws IOException {
+    public void shouldPromptUserForInputWhenCollectingMove() {
         when(userInputStream.getUserInput()).thenReturn("");
 
-        player.prompt();
+        player.getPlayersInput();
         verify(userInputStream).getUserInput();
     }
 

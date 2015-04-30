@@ -1,5 +1,6 @@
 package tic_tac_toe;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -21,11 +22,25 @@ public class BoardTest {
 
         board.draw();
         verify(printStream).println(contains(
-                "   |   |\n" +
+                "   |   |   \n" +
                 "-----------\n" +
-                "   |   |\n" +
+                "   |   |   \n" +
                 "-----------\n" +
-                "   |   |"));
+                "   |   |  "));
     }
 
+    @Test
+    public void shouldLeaveAnXOnTheMarkedCell() {
+        PrintStream printStream = mock(PrintStream.class);
+        Board board = new Board(printStream);
+
+        board.markCell("1");
+        board.draw();
+        verify(printStream).println(contains(
+                " X |   |   \n" +
+                "-----------\n" +
+                "   |   |   \n" +
+                "-----------\n" +
+                "   |   |  "));
+    }
 }
