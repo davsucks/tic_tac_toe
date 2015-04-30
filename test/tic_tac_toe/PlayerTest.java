@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -18,12 +19,14 @@ public class PlayerTest {
     private UserInputStream userInputStream;
     private Player player;
     private PrintStream printStream;
+    private char playerSymbol;
 
     @Before
     public void setUp() {
         userInputStream = mock(UserInputStream.class);
         printStream = mock(PrintStream.class);
-        player = new Player(userInputStream, printStream);
+        playerSymbol = 'X';
+        player = new Player(userInputStream, printStream, playerSymbol);
     }
 
     @Test
@@ -40,6 +43,11 @@ public class PlayerTest {
 
         player.prompt();
         verify(printStream).println(contains("Please input"));
+    }
+
+    @Test
+    public void shouldHaveAMethodToReturnAPlayersCharacterSymbol() {
+        assertEquals(player.getSymbol(), playerSymbol);
     }
 
     

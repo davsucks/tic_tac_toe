@@ -8,10 +8,12 @@ import java.io.PrintStream;
 public class Player {
     private UserInputStream userInputStream;
     private PrintStream printStream;
+    private char symbol;
 
-    public Player(UserInputStream userInputStream, PrintStream printStream) {
+    public Player(UserInputStream userInputStream, PrintStream printStream, char symbol) {
         this.userInputStream = userInputStream;
         this.printStream = printStream;
+        this.symbol = symbol;
     }
 
     public void prompt() {
@@ -21,5 +23,9 @@ public class Player {
     public int getPlayersInput() {
         prompt();
         return userInputStream.getIntFromUser();
+    }
+
+    public char getSymbol() {
+        return symbol;
     }
 }
