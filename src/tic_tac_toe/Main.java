@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         UserInputStream userInputStream = new UserInputStream();
-        Player player = new Player(userInputStream);
+        Player player = new Player(userInputStream, printStream);
         Game game = new Game(new Board(printStream), player);
         game.start();
     }
