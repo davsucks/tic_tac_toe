@@ -85,4 +85,17 @@ public class GameTest {
         inOrder.verify(board).markCell(1, 'X');
         inOrder.verify(board).markCell(2, 'O');
     }
+
+    @Test
+    public void shouldRedrawBoardAfterPlayerTwoDecides() {
+        when(playerOne.getPlayersInput()).thenReturn(1);
+        when(playerOne.getSymbol()).thenReturn('X');
+        when(playerTwo.getPlayersInput()).thenReturn(2);
+        when(playerTwo.getSymbol()).thenReturn('O');
+        when(board.buildBoard()).thenReturn("board");
+
+        game.start();
+
+        verify(printStream, atLeast(3)).println("board");
+    }
 }

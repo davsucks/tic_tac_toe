@@ -24,5 +24,6 @@ public class Game {
         board.markCell(playerOne.getPlayersInput(), playerOne.getSymbol());
         printStream.println(board.buildBoard());
         board.markCell(playerTwo.getPlayersInput(), playerTwo.getSymbol());
+        printStream.println(board.buildBoard());
     }
 }
