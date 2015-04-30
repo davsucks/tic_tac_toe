@@ -14,13 +14,19 @@ import static org.mockito.Mockito.verify;
  */
 public class BoardTest {
 
+    private PrintStream printStream;
+    private Board board;
+
+    @Before
+    public void setUp() throws Exception {
+        printStream = mock(PrintStream.class);
+        board = new Board(printStream);
+    }
+
     @Test
     public void shouldDisplayBoardWhenDrawn() {
-        PrintStream printStream = mock(PrintStream.class);
-
-        Board board = new Board(printStream);
-
         board.draw();
+
         verify(printStream).println(contains(
                 "   |   |   \n" +
                 "-----------\n" +
@@ -31,11 +37,9 @@ public class BoardTest {
 
     @Test
     public void shouldLeaveAnXOnTheMarkedCell() {
-        PrintStream printStream = mock(PrintStream.class);
-        Board board = new Board(printStream);
-
         board.markCell(1);
         board.draw();
+
         verify(printStream).println(contains(
                 " X |   |   \n" +
                 "-----------\n" +
