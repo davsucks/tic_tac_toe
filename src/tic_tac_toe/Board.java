@@ -31,7 +31,10 @@ public class Board {
     }
 
     public void markCell(int cell) {
-        gameBoard[normalizeUserInput(cell)] = "X";
+        int index = normalizeUserInput(cell);
+        if (index >= 0 && index < 9) {
+            gameBoard[index] = "X";
+        }
     }
 
     private int normalizeUserInput(int userInput) {

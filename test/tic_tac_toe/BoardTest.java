@@ -47,4 +47,17 @@ public class BoardTest {
                 "-----------\n" +
                 "   |   |  "));
     }
+
+    @Test
+    public void shouldLetUserChooseInvalidCell() {
+        board.markCell(100);
+        board.draw();
+
+        verify(printStream).println(contains(
+                "   |   |   \n" +
+                "-----------\n" +
+                "   |   |   \n" +
+                "-----------\n" +
+                "   |   |  "));
+    }
 }
