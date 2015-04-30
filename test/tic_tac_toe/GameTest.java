@@ -2,7 +2,9 @@ package tic_tac_toe;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -33,7 +35,9 @@ public class GameTest {
     public void shouldPromptPlayerAfterDrawingBoard() {
         game.start();
 
-        verify(board).draw();
-        verify(player).prompt();
+        InOrder inOrder = inOrder(board, player);
+
+        inOrder.verify(board).draw();
+        inOrder.verify(player).prompt();
     }
 }
