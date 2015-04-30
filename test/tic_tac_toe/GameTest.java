@@ -12,28 +12,27 @@ import static org.mockito.Mockito.verify;
 public class GameTest {
 
     private Player player;
+    private Board board;
+    private Game game;
 
     @Before
     public void setUp() throws Exception {
         player = mock(Player.class);
+        board = mock(Board.class);
+        game = new Game(board, player);
     }
 
     @Test
     public void shouldDrawBoardWhenGameStarts() {
-        Board board = mock(Board.class);
-
-        Game game = new Game(board, player);
-
         game.start();
+
         verify(board).draw();
     }
 
     @Test
     public void shouldPromptPlayerAfterDrawingBoard() {
-        Board board = mock(Board.class);
-        Game game = new Game(board, player);
-
         game.start();
+
         verify(board).draw();
         verify(player).prompt();
     }
