@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import java.io.PrintStream;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -14,28 +16,32 @@ public class GameTest {
     private Player player;
     private Board board;
     private Game game;
+    private PrintStream printStream;
 
     @Before
     public void setUp() throws Exception {
         player = mock(Player.class);
         board = mock(Board.class);
-        game = new Game(board, player);
+        printStream = mock(PrintStream.class);
+        game = new Game(board, player, printStream);
     }
 
     @Test
     public void shouldDrawBoardWhenGameStarts() {
+        when(board.buildBoard()).thenReturn("Board");
         game.start();
 
-        verify(board, atLeastOnce()).draw();
+        verify(printStream, atLeastOnce()).println("Board");
     }
 
     @Test
     public void shouldGetPlayersInputAfterDrawingBoard() {
+        when(board.buildBoard()).thenReturn("Board");
         game.start();
 
-        InOrder inOrder = inOrder(board, player);
+        InOrder inOrder = inOrder(printStream, player);
 
-        inOrder.verify(board).draw();
+        inOrder.verify(printStream).println("Board");
         inOrder.verify(player).getPlayersInput();
     }
 
@@ -51,14 +57,15 @@ public class GameTest {
     @Test
     public void shouldDrawBoardAgainAfterMarkingBoard() {
         when(player.getPlayersInput()).thenReturn(1);
+        when(board.buildBoard()).thenReturn("Board");
 
         game.start();
 
-        InOrder inOrder = inOrder(board, player);
+        InOrder inOrder = inOrder(printStream, player);
 
-        inOrder.verify(board, times(1)).draw();
+        inOrder.verify(printStream, times(1)).println("Board");
         inOrder.verify(player).getPlayersInput();
-        inOrder.verify(board, atLeastOnce()).draw();
+        inOrder.verify(printStream, atLeastOnce()).println("Board");
 
     }
 }

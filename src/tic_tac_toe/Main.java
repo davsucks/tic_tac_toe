@@ -10,7 +10,7 @@ public class Main {
         PrintStream printStream = new PrintStream(System.out);
         UserInputStream userInputStream = new UserInputStream();
         Player player = new Player(userInputStream, printStream);
-        Game game = new Game(new Board(printStream), player);
+        Game game = new Game(new Board(), player, printStream);
         game.start();
     }
 }

@@ -16,51 +16,29 @@ import static org.mockito.Mockito.verify;
  */
 public class BoardTest {
 
-    private PrintStream printStream;
     private Board board;
 
     @Before
     public void setUp() throws Exception {
-        printStream = mock(PrintStream.class);
-        board = new Board(printStream);
-    }
-
-    @Test
-    public void shouldDisplayBoardWhenDrawn() {
-        board.draw();
-
-        verify(printStream).println(contains(
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |  "));
+        board = new Board();
     }
 
     @Test
     public void shouldLeaveAnXOnTheMarkedCell() {
+        String firstCellMarked = " X |   |   \n" +
+                                 "-----------\n" +
+                                 "   |   |   \n" +
+                                 "-----------\n" +
+                                 "   |   |  ";
         board.markCell(1);
-        board.draw();
-
-        verify(printStream).println(contains(
-                " X |   |   \n" +
-                "-----------\n" +
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |  "));
+        assertEquals(board.buildBoard(), firstCellMarked);
     }
 
     @Test
     public void shouldLetUserChooseInvalidCell() {
+        String initialBoard = board.buildBoard();
         board.markCell(100);
-        board.draw();
-
-        verify(printStream).println(contains(
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |   \n" +
-                "-----------\n" +
-                "   |   |  "));
+        assertEquals(board.buildBoard(), initialBoard);
     }
 
     @Test
@@ -71,16 +49,5 @@ public class BoardTest {
                             "-----------\n" +
                             "   |   |  ";
         assertEquals(board.buildBoard(), emptyBoard);
-    }
-
-    @Test
-    public void shouldBuildBoardWithFirstCellMarkedWhenFirstCellIsMarked() {
-        String firstCellMarked = " X |   |   \n" +
-                                 "-----------\n" +
-                                 "   |   |   \n" +
-                                 "-----------\n" +
-                                 "   |   |  ";
-        board.markCell(1);
-        assertEquals(board.buildBoard(), firstCellMarked);
     }
 }

@@ -6,11 +6,9 @@ import java.io.PrintStream;
  * Created by dsucksto on 4/30/15.
  */
 public class Board {
-    private PrintStream printStream;
     private String[] gameBoard;
 
-    public Board(PrintStream printStream) {
-        this.printStream = printStream;
+    public Board() {
         initializeGameBoard();
     }
 
@@ -19,15 +17,6 @@ public class Board {
         for (int i = 0; i < 9; i++) {
             gameBoard[i] = " ";
         }
-    }
-
-    public void draw() {
-        printStream.println(
-                " " + gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2] + " \n" +
-                "-----------\n" +
-                " " + gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5] + " \n" +
-                "-----------\n" +
-                " " + gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
 
     public void markCell(int cell) {
