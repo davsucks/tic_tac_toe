@@ -8,7 +8,8 @@ import java.io.PrintStream;
 public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
-        Player player = new Player();
+        UserInputStream userInputStream = new UserInputStream();
+        Player player = new Player(userInputStream);
         Game game = new Game(new Board(printStream), player);
         game.start();
     }
