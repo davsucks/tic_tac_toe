@@ -9,11 +9,13 @@ public class Player {
     private UserInputStream userInputStream;
     private PrintStream printStream;
     private char symbol;
+    private Board board;
 
-    public Player(UserInputStream userInputStream, PrintStream printStream, char symbol) {
+    public Player(UserInputStream userInputStream, PrintStream printStream, char symbol, Board board) {
         this.userInputStream = userInputStream;
         this.printStream = printStream;
         this.symbol = symbol;
+        this.board = board;
     }
 
     public void prompt() {
@@ -27,5 +29,9 @@ public class Player {
 
     public char getSymbol() {
         return symbol;
+    }
+
+    public void takeTurn() {
+        board.markCell(getPlayersInput(), symbol);
     }
 }

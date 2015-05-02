@@ -1,6 +1,7 @@
 package tic_tac_toe;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InOrder;
 
@@ -37,65 +38,48 @@ public class GameTest {
     }
 
     @Test
-    public void shouldGetPlayersInputAfterDrawingBoard() {
-        when(board.buildBoard()).thenReturn("Board");
+    public void shouldTellPlayerToTakeTurnAfterDrawingBoard() {
+        String testBoard = "Board";
+        when(board.buildBoard()).thenReturn(testBoard);
         game.start();
 
         InOrder inOrder = inOrder(printStream, playerOne);
 
-        inOrder.verify(printStream).println("Board");
-        inOrder.verify(playerOne).getPlayersInput();
+        inOrder.verify(printStream).println(testBoard);
+        inOrder.verify(playerOne).takeTurn();
     }
 
     @Test
-    public void shouldMarkBoardWhenUserDecidesOnACell() {
-        when(playerOne.getSymbol()).thenReturn('X');
-        when(playerOne.getPlayersInput()).thenReturn(1);
-
-        game.start();
-
-        verify(board).markCell(1, 'X');
-    }
-
-    @Test
-    public void shouldDrawBoardAgainAfterMarkingBoard() {
-        when(playerOne.getPlayersInput()).thenReturn(1);
-        when(board.buildBoard()).thenReturn("Board");
+    public void shouldDrawBoardAgainAfterPlayerTakesTurn() {
+        String testBoard = "Board";
+        when(board.buildBoard()).thenReturn(testBoard);
 
         game.start();
 
         InOrder inOrder = inOrder(printStream, playerOne);
 
-        inOrder.verify(printStream, times(1)).println("Board");
-        inOrder.verify(playerOne).getPlayersInput();
-        inOrder.verify(printStream, atLeastOnce()).println("Board");
+        inOrder.verify(printStream, times(1)).println(testBoard);
+        inOrder.verify(playerOne).takeTurn();
+        inOrder.verify(printStream, atLeastOnce()).println(testBoard);
 
     }
 
     @Test
     public void shouldAlternateBetweenPlayerOneAndPlayerTwo() {
-        when(playerOne.getPlayersInput()).thenReturn(1);
-        when(playerOne.getSymbol()).thenReturn('X');
-        when(playerTwo.getPlayersInput()).thenReturn(2);
-        when(playerTwo.getSymbol()).thenReturn('O');
-
         game.start();
 
-        InOrder inOrder = inOrder(board);
-        inOrder.verify(board).markCell(1, 'X');
-        inOrder.verify(board).markCell(2, 'O');
+        InOrder inOrder = inOrder(playerOne, playerTwo);
+        inOrder.verify(playerOne).takeTurn();
+        inOrder.verify(playerTwo).takeTurn();
     }
 
     @Test
-    public void shouldRedrawBoardAfterPlayerTwoDecides() {
+    @Ignore
+    public void shouldKeepPromptingPlayerIfCellIsAlreadyTaken() {
         when(playerOne.getPlayersInput()).thenReturn(1);
         when(playerOne.getSymbol()).thenReturn('X');
-        when(playerTwo.getPlayersInput()).thenReturn(2);
-        when(playerTwo.getSymbol()).thenReturn('O');
-        when(board.buildBoard()).thenReturn("board");
-
+        when(board.markCell(1, 'X')).thenReturn(false).thenReturn(true);
         game.start();
-
-        verify(printStream, atLeast(3)).println("board");
+        verify(board, atLeast(2)).markCell(1, 'X');
     }
 }

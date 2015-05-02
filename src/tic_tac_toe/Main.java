@@ -9,9 +9,10 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         UserInputStream userInputStream = new UserInputStream();
-        Player playerOne = new Player(userInputStream, printStream, 'X');
-        Player playerTwo = new Player(userInputStream, printStream, 'O');
-        Game game = new Game(new Board(), playerOne, printStream, playerTwo);
+        Board board = new Board();
+        Player playerOne = new Player(userInputStream, printStream, 'X', board);
+        Player playerTwo = new Player(userInputStream, printStream, 'O', board);
+        Game game = new Game(board, playerOne, printStream, playerTwo);
         game.start();
     }
 }

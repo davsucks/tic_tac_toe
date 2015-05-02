@@ -21,9 +21,9 @@ public class Game {
 
     public void start() {
         printStream.println(board.buildBoard());
-        board.markCell(playerOne.getPlayersInput(), playerOne.getSymbol());
+        playerOne.takeTurn();
         printStream.println(board.buildBoard());
-        board.markCell(playerTwo.getPlayersInput(), playerTwo.getSymbol());
+        playerTwo.takeTurn();
         printStream.println(board.buildBoard());
     }
 }

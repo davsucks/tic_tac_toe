@@ -20,13 +20,15 @@ public class PlayerTest {
     private Player player;
     private PrintStream printStream;
     private char playerSymbol;
+    private Board board;
 
     @Before
     public void setUp() {
         userInputStream = mock(UserInputStream.class);
         printStream = mock(PrintStream.class);
+        board = mock(Board.class);
         playerSymbol = 'X';
-        player = new Player(userInputStream, printStream, playerSymbol);
+        player = new Player(userInputStream, printStream, playerSymbol, board);
     }
 
     @Test
@@ -50,5 +52,11 @@ public class PlayerTest {
         assertEquals(player.getSymbol(), playerSymbol);
     }
 
-    
+    @Test
+    public void shouldMarkBoardWhenPlayerTakesTurn() throws Exception {
+        when(userInputStream.getIntFromUser()).thenReturn(1);
+        player.takeTurn();
+        verify(board).markCell(1, playerSymbol);
+
+    }
 }
