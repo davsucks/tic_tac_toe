@@ -72,14 +72,4 @@ public class GameTest {
         inOrder.verify(playerOne).takeTurn();
         inOrder.verify(playerTwo).takeTurn();
     }
-
-    @Test
-    @Ignore
-    public void shouldKeepPromptingPlayerIfCellIsAlreadyTaken() {
-        when(playerOne.getPlayersInput()).thenReturn(1);
-        when(playerOne.getSymbol()).thenReturn('X');
-        when(board.markCell(1, 'X')).thenReturn(false).thenReturn(true);
-        game.start();
-        verify(board, atLeast(2)).markCell(1, 'X');
-    }
 }

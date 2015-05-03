@@ -1,15 +1,14 @@
 package tic_tac_toe;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by dsucksto on 4/30/15.
@@ -36,6 +35,7 @@ public class PlayerTest {
         when(userInputStream.getIntFromUser()).thenReturn(0);
 
         player.getPlayersInput();
+
         verify(userInputStream).getIntFromUser();
     }
 
@@ -44,6 +44,7 @@ public class PlayerTest {
         when(userInputStream.getIntFromUser()).thenReturn(0);
 
         player.prompt();
+
         verify(printStream).println(contains("Please input"));
     }
 
@@ -55,8 +56,20 @@ public class PlayerTest {
     @Test
     public void shouldMarkBoardWhenPlayerTakesTurn() throws Exception {
         when(userInputStream.getIntFromUser()).thenReturn(1);
+
         player.takeTurn();
+
         verify(board).markCell(1, playerSymbol);
 
+    }
+
+    @Test
+    public void shouldKeepPromptingPlayerIfCellIsAlreadyTaken() {
+        when(userInputStream.getIntFromUser()).thenReturn(1);
+        when(board.markCell(1, 'X')).thenReturn(false, true);
+
+        player.takeTurn();
+
+        verify(board, atLeast(2)).markCell(1, 'X');
     }
 }

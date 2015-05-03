@@ -32,6 +32,10 @@ public class Player {
     }
 
     public void takeTurn() {
-        board.markCell(getPlayersInput(), symbol);
+        boolean cell_marked = board.markCell(getPlayersInput(), symbol);
+        while (!cell_marked) {
+            cell_marked = board.markCell(getPlayersInput(), symbol);
+        }
+
     }
 }
