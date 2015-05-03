@@ -34,6 +34,7 @@ public class Player {
     public void takeTurn() {
         boolean cell_marked = board.markCell(getPlayersInput(), symbol);
         while (!cell_marked) {
+            printStream.println("Location already taken");
             cell_marked = board.markCell(getPlayersInput(), symbol);
         }
 

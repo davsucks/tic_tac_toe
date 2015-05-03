@@ -54,9 +54,9 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldMarkBoardWhenPlayerTakesTurn() throws Exception {
+    public void shouldMarkBoardWhenPlayerTakesTurn() {
         when(userInputStream.getIntFromUser()).thenReturn(1);
-
+        when(board.markCell(1, playerSymbol)).thenReturn(true);
         player.takeTurn();
 
         verify(board).markCell(1, playerSymbol);
@@ -66,10 +66,20 @@ public class PlayerTest {
     @Test
     public void shouldKeepPromptingPlayerIfCellIsAlreadyTaken() {
         when(userInputStream.getIntFromUser()).thenReturn(1);
-        when(board.markCell(1, 'X')).thenReturn(false, true);
+        when(board.markCell(1, playerSymbol)).thenReturn(false, true);
 
         player.takeTurn();
 
-        verify(board, atLeast(2)).markCell(1, 'X');
+        verify(board, atLeast(2)).markCell(1, playerSymbol);
+    }
+
+    @Test
+    public void shouldGiveUserAMessageWhenAMoveIsInvalid() {
+        when(userInputStream.getIntFromUser()).thenReturn(1);
+        when(board.markCell(1, playerSymbol)).thenReturn(false, true);
+
+        player.takeTurn();
+
+        verify(printStream).println(contains("Location already taken"));
     }
 }
