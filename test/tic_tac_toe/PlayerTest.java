@@ -1,7 +1,6 @@
 package tic_tac_toe;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -43,7 +42,7 @@ public class PlayerTest {
     public void shouldInstructUserHowToInput() {
         when(userInputStream.getIntFromUser()).thenReturn(0);
 
-        player.prompt();
+        player.promptUserForInput();
 
         verify(printStream).println(contains("Please input"));
     }

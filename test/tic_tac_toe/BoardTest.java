@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -14,11 +15,21 @@ import static org.mockito.Mockito.verify;
  */
 public class BoardTest {
 
-    private Board board;
+    private Board emptyBoard;
+    private Board fullBoard;
+    char[] emptyGameBoardArray;
+    char[] fullGameBoardArray;
 
     @Before
     public void setUp() throws Exception {
-        board = new Board();
+        emptyGameBoardArray = new char[9];
+        fullGameBoardArray = new char[9];
+        for (int index = 0; index < 9; index++) {
+            emptyGameBoardArray[index] = ' ';
+            fullGameBoardArray[index] = 'X';
+        }
+        emptyBoard = new Board(emptyGameBoardArray);
+        fullBoard = new Board(fullGameBoardArray);
     }
 
     @Test
@@ -28,15 +39,15 @@ public class BoardTest {
                                  "   |   |   \n" +
                                  "-----------\n" +
                                  "   |   |  ";
-        board.markCell(1, 'X');
-        assertEquals(board.buildBoard(), firstCellMarked);
+        emptyBoard.markCell(1, 'X');
+        assertEquals(emptyBoard.buildBoard(), firstCellMarked);
     }
 
     @Test
     public void shouldLetUserChooseInvalidCell() {
-        String initialBoard = board.buildBoard();
-        board.markCell(100, 'X');
-        assertEquals(board.buildBoard(), initialBoard);
+        String initialBoard = emptyBoard.buildBoard();
+        emptyBoard.markCell(100, 'X');
+        assertEquals(emptyBoard.buildBoard(), initialBoard);
     }
 
     @Test
@@ -46,7 +57,7 @@ public class BoardTest {
                             "   |   |   \n" +
                             "-----------\n" +
                             "   |   |  ";
-        assertEquals(board.buildBoard(), emptyBoard);
+        assertEquals(this.emptyBoard.buildBoard(), emptyBoard);
     }
 
     @Test
@@ -56,13 +67,18 @@ public class BoardTest {
                             "   |   |   \n" +
                             "-----------\n" +
                             "   |   |  ";
-        board.markCell(2, 'O');
-        assertEquals(board.buildBoard(), finalBoard);
+        emptyBoard.markCell(2, 'O');
+        assertEquals(emptyBoard.buildBoard(), finalBoard);
     }
 
     @Test
-    public void shouldMarkCellThatHasAlreadyBeenMarked() {
-        board.markCell(1, 'X');
-        assertFalse(board.markCell(1, 'X'));
+    public void shouldNotMarkCellThatHasAlreadyBeenMarked() {
+        emptyBoard.markCell(1, 'X');
+        assertFalse(emptyBoard.markCell(1, 'X'));
+    }
+
+    @Test
+    public void shouldBeAbleToTellWhenBoardIsFull() {
+        assertTrue(fullBoard.isFull());
     }
 }

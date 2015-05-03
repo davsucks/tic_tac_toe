@@ -72,4 +72,9 @@ public class GameTest {
         inOrder.verify(playerOne).takeTurn();
         inOrder.verify(playerTwo).takeTurn();
     }
+
+    @Test
+    public void shouldAlternatePlayersUntilBoardIsFull() {
+
+    }
 }

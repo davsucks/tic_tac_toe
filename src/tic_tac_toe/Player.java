@@ -18,12 +18,12 @@ public class Player {
         this.board = board;
     }
 
-    public void prompt() {
+    public void promptUserForInput() {
         printStream.println("Please input a number between 1 and 9:");
     }
 
     public int getPlayersInput() {
-        prompt();
+        promptUserForInput();
         return userInputStream.getIntFromUser();
     }
 
@@ -35,6 +35,7 @@ public class Player {
         boolean cell_marked = board.markCell(getPlayersInput(), symbol);
         while (!cell_marked) {
             printStream.println("Location already taken");
+            printStream.println(board.buildBoard());
             cell_marked = board.markCell(getPlayersInput(), symbol);
         }
 

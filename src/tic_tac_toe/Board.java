@@ -8,15 +8,8 @@ import java.io.PrintStream;
 public class Board {
     private char[] gameBoard;
 
-    public Board() {
-        initializeGameBoard();
-    }
-
-    private void initializeGameBoard() {
-        this.gameBoard = new char[9];
-        for (int i = 0; i < 9; i++) {
-            gameBoard[i] = ' ';
-        }
+    public Board(char[] gameBoard) {
+        this.gameBoard = gameBoard;
     }
 
     public boolean markCell(int cell, char symbol) {
@@ -38,5 +31,14 @@ public class Board {
                 " " + gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5] + " \n" +
                 "-----------\n" +
                 " " + gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8];
+    }
+
+    public boolean isFull() {
+        for (int index = 0; index < 9; index++) {
+            if (gameBoard[index] == ' ') {
+                return false;
+            }
+        }
+        return true;
     }
 }
