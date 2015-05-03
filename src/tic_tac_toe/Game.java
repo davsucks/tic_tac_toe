@@ -23,9 +23,18 @@ public class Game {
         printStream.println(board.buildBoard());
         while(!board.isFull()) {
             playerOne.takeTurn();
+            if (board.isFull()) {
+                break;
+            }
             printStream.println(board.buildBoard());
             playerTwo.takeTurn();
             printStream.println(board.buildBoard());
         }
+        finishGame();
+    }
+
+    private void finishGame() {
+        printStream.println(board.buildBoard());
+        printStream.println("Game is a draw.");
     }
 }

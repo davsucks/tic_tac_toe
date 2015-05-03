@@ -32,6 +32,8 @@ public class GameTest {
     @Test
     public void shouldDrawBoardWhenGameStarts() {
         when(board.buildBoard()).thenReturn("Board");
+        when(board.isFull()).thenReturn(true);
+
         game.start();
 
         verify(printStream, atLeastOnce()).println("Board");
@@ -41,6 +43,8 @@ public class GameTest {
     public void shouldTellPlayerToTakeTurnAfterDrawingBoard() {
         String testBoard = "Board";
         when(board.buildBoard()).thenReturn(testBoard);
+        when(board.isFull()).thenReturn(false, true);
+
         game.start();
 
         InOrder inOrder = inOrder(printStream, playerOne);
@@ -53,6 +57,7 @@ public class GameTest {
     public void shouldDrawBoardAgainAfterPlayerTakesTurn() {
         String testBoard = "Board";
         when(board.buildBoard()).thenReturn(testBoard);
+        when(board.isFull()).thenReturn(false, true);
 
         game.start();
 
@@ -66,6 +71,7 @@ public class GameTest {
 
     @Test
     public void shouldAlternateBetweenPlayerOneAndPlayerTwo() {
+        when(board.isFull()).thenReturn(false, false, true);
         game.start();
 
         InOrder inOrder = inOrder(playerOne, playerTwo);
@@ -75,11 +81,20 @@ public class GameTest {
 
     @Test
     public void shouldAlternatePlayersUntilBoardIsFull() {
-        when(board.isFull()).thenReturn(false, false, true);
+        when(board.isFull()).thenReturn(false, false, false, false, true);
 
         game.start();
 
         verify(playerOne, times(2)).takeTurn();
         verify(playerTwo, times(2)).takeTurn();
+    }
+
+    @Test
+    public void shouldTellPlayersGameIsADraw() {
+        when(board.isFull()).thenReturn(true);
+
+        game.start();
+
+        verify(printStream).println(contains("Game is a draw"));
     }
 }
