@@ -97,7 +97,8 @@ public class BoardTest {
 
     @Test
     public void shouldGetTheSpecifiedCell() {
-        emptyBoard.markCell(1, 'O');
-        assertEquals(new Character('O'), emptyBoard.getCell(1));
+        Character testChar = 'O';
+        emptyBoard.markCell(1, testChar);
+        assertEquals(testChar, emptyBoard.getCell(1));
     }
 }
