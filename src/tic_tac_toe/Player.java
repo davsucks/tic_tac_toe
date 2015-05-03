@@ -32,12 +32,13 @@ public class Player {
     }
 
     public void takeTurn() {
-        boolean cell_marked = board.markCell(getPlayersInput(), symbol);
-        while (!cell_marked) {
+        int desiredCell = getPlayersInput();
+        while (!board.isCellAvailable(desiredCell)) {
             printStream.println("Location already taken");
             printStream.println(board.buildBoard());
-            cell_marked = board.markCell(getPlayersInput(), symbol);
+            desiredCell = getPlayersInput();
         }
+        board.markCell(desiredCell, symbol);
 
     }
 }

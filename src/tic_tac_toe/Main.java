@@ -1,6 +1,8 @@
 package tic_tac_toe;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by dsucksto on 4/30/15.
@@ -16,10 +18,10 @@ public class Main {
         game.start();
     }
 
-    private static char[] initializeEmptyBoard() {
-        char[] gameBoard = new char[9];
-        for (int index = 0; index < 9; index++) {
-            gameBoard[index] = ' ';
+    private static ArrayList<ArrayList<Character>> initializeEmptyBoard() {
+        ArrayList<ArrayList<Character>> gameBoard = new ArrayList<>(3);
+        for (ArrayList<Character> row : gameBoard) {
+            row = new ArrayList<>(Collections.nCopies(3, ' '));
         }
         return gameBoard;
     }

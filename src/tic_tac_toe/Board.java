@@ -1,24 +1,32 @@
 package tic_tac_toe;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+
 
 /**
  * Created by dsucksto on 4/30/15.
  */
 public class Board {
-    private char[] gameBoard;
+    private ArrayList<ArrayList<Character>> gameBoard;
 
-    public Board(char[] gameBoard) {
+    public Board(ArrayList<ArrayList<Character>> gameBoard) {
         this.gameBoard = gameBoard;
     }
 
-    public boolean markCell(int cell, char symbol) {
+    public boolean isCellAvailable(int cell) {
         int index = normalizeUserInput(cell);
-        if (index >= 0 && index < 9 && gameBoard[index] == ' ') {
-            gameBoard[index] = symbol;
-            return true;
-        }
-        return false;
+        int row = index == 0 ? 0 : index / 3;
+        int col = index % 3;
+        return gameBoard.get(row).get(col) == ' ';
+    }
+
+    public void markCell(int cell, Character symbol) {
+        int index = normalizeUserInput(cell);
+        int row = index == 0 ? 0 : index / 3;
+        int col = index % 3;
+        gameBoard.get(row).set(col, symbol);
+
     }
 
     private int normalizeUserInput(int userInput) {
@@ -26,19 +34,27 @@ public class Board {
     }
 
     public String buildBoard() {
-        return " " + gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2] + " \n" +
+        return " " + gameBoard.get(0).get(0) + " | " + gameBoard.get(0).get(1) + " | " + gameBoard.get(0).get(2) + " \n" +
                 "-----------\n" +
-                " " + gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5] + " \n" +
+                " " + gameBoard.get(1).get(0) + " | " + gameBoard.get(1).get(1) + " | " + gameBoard.get(0).get(2) + " \n" +
                 "-----------\n" +
-                " " + gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8];
+                " " + gameBoard.get(2).get(0) + " | " + gameBoard.get(2).get(1) + " | " + gameBoard.get(2).get(2);
     }
 
     public boolean isFull() {
-        for (int index = 0; index < 9; index++) {
-            if (gameBoard[index] == ' ') {
-                return false;
+        for (ArrayList<Character> row : gameBoard) {
+            for (Character character : row) {
+                if (character == ' ') {
+                    return false;
+                }
             }
+
         }
         return true;
     }
+
+    public boolean playerHasWon(char x) {
+        return false;
+    }
+
 }

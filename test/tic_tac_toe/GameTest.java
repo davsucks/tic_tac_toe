@@ -72,6 +72,7 @@ public class GameTest {
     @Test
     public void shouldAlternateBetweenPlayerOneAndPlayerTwo() {
         when(board.isFull()).thenReturn(false, false, true);
+
         game.start();
 
         InOrder inOrder = inOrder(playerOne, playerTwo);

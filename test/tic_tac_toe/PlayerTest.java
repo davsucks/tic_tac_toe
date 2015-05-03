@@ -54,8 +54,9 @@ public class PlayerTest {
 
     @Test
     public void shouldMarkBoardWhenPlayerTakesTurn() {
+        when(board.isCellAvailable(1)).thenReturn(true);
         when(userInputStream.getIntFromUser()).thenReturn(1);
-        when(board.markCell(1, playerSymbol)).thenReturn(true);
+
         player.takeTurn();
 
         verify(board).markCell(1, playerSymbol);
@@ -64,18 +65,18 @@ public class PlayerTest {
 
     @Test
     public void shouldKeepPromptingPlayerIfCellIsAlreadyTaken() {
+        when(board.isCellAvailable(1)).thenReturn(false, true);
         when(userInputStream.getIntFromUser()).thenReturn(1);
-        when(board.markCell(1, playerSymbol)).thenReturn(false, true);
 
         player.takeTurn();
 
-        verify(board, atLeast(2)).markCell(1, playerSymbol);
+        verify(userInputStream, atLeast(2)).getIntFromUser();
     }
 
     @Test
     public void shouldGiveUserAMessageWhenAMoveIsInvalid() {
+        when(board.isCellAvailable(1)).thenReturn(false, true);
         when(userInputStream.getIntFromUser()).thenReturn(1);
-        when(board.markCell(1, playerSymbol)).thenReturn(false, true);
 
         player.takeTurn();
 
