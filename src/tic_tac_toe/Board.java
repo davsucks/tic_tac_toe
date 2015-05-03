@@ -8,24 +8,20 @@ import java.util.ArrayList;
  * Created by dsucksto on 4/30/15.
  */
 public class Board {
-    private ArrayList<ArrayList<Character>> gameBoard;
+    private ArrayList<Character> gameBoard;
 
-    public Board(ArrayList<ArrayList<Character>> gameBoard) {
+    public Board(ArrayList<Character> gameBoard) {
         this.gameBoard = gameBoard;
     }
 
     public boolean isCellAvailable(int cell) {
         int index = normalizeUserInput(cell);
-        int row = index == 0 ? 0 : index / 3;
-        int col = index % 3;
-        return gameBoard.get(row).get(col) == ' ';
+        return gameBoard.get(index) == ' ';
     }
 
     public void markCell(int cell, Character symbol) {
         int index = normalizeUserInput(cell);
-        int row = index == 0 ? 0 : index / 3;
-        int col = index % 3;
-        gameBoard.get(row).set(col, symbol);
+        gameBoard.set(index, symbol);
 
     }
 
@@ -34,27 +30,22 @@ public class Board {
     }
 
     public String buildBoard() {
-        return " " + gameBoard.get(0).get(0) + " | " + gameBoard.get(0).get(1) + " | " + gameBoard.get(0).get(2) + " \n" +
+        return " " + gameBoard.get(0) + " | " + gameBoard.get(1) + " | " + gameBoard.get(2) + " \n" +
                 "-----------\n" +
-                " " + gameBoard.get(1).get(0) + " | " + gameBoard.get(1).get(1) + " | " + gameBoard.get(0).get(2) + " \n" +
+                " " + gameBoard.get(3) + " | " + gameBoard.get(4) + " | " + gameBoard.get(5) + " \n" +
                 "-----------\n" +
-                " " + gameBoard.get(2).get(0) + " | " + gameBoard.get(2).get(1) + " | " + gameBoard.get(2).get(2);
+                " " + gameBoard.get(6) + " | " + gameBoard.get(7) + " | " + gameBoard.get(8);
     }
 
     public boolean isFull() {
-        for (ArrayList<Character> row : gameBoard) {
-            for (Character character : row) {
-                if (character == ' ') {
-                    return false;
-                }
-            }
-
-        }
-        return true;
+        return !gameBoard.contains(' ');
     }
 
     public boolean playerHasWon(char x) {
         return false;
     }
 
+    public Character getCell(int index) {
+        return gameBoard.get(normalizeUserInput(index));
+    }
 }

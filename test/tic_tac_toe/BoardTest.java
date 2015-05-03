@@ -23,17 +23,13 @@ public class BoardTest {
 
     private Board emptyBoard;
     private Board fullBoard;
-    ArrayList<ArrayList<Character>> emptyGameBoardArray;
-    ArrayList<ArrayList<Character>> fullGameBoardArray;
+    ArrayList<Character> emptyGameBoardArray;
+    ArrayList<Character> fullGameBoardArray;
 
     @Before
     public void setUp() throws Exception {
-        emptyGameBoardArray = new ArrayList<>(3);
-        fullGameBoardArray = new ArrayList<>(3);
-        for (int index = 0; index < 3; index++) {
-            emptyGameBoardArray.add(new ArrayList<>(Collections.nCopies(3, ' ')));
-            fullGameBoardArray.add(index, new ArrayList<>(Collections.nCopies(3, 'X')));
-        }
+        emptyGameBoardArray = new ArrayList<>(Collections.nCopies(9, ' '));
+        fullGameBoardArray = new ArrayList<>(Collections.nCopies(9, 'X'));
         emptyBoard = new Board(emptyGameBoardArray);
         fullBoard = new Board(fullGameBoardArray);
     }
@@ -71,11 +67,6 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldNotMarkCellThatHasAlreadyBeenMarked() {
-        emptyBoard.markCell(1, 'X');
-    }
-
-    @Test
     public void shouldBeAbleToTellWhenBoardIsFull() {
         assertTrue(fullBoard.isFull());
     }
@@ -83,7 +74,9 @@ public class BoardTest {
     @Test
     @Ignore
     public void shouldTellWhenPlayerHasWonByRow() throws Exception {
-        emptyGameBoardArray.set(0, new ArrayList<>(Collections.nCopies(3, 'X')));
+        emptyGameBoardArray.set(0, 'X');
+        emptyGameBoardArray.set(1, 'X');
+        emptyGameBoardArray.set(2, 'X');
 
         Board winningBoard = new Board(emptyGameBoardArray);
 
@@ -97,8 +90,14 @@ public class BoardTest {
 
     @Test
     public void shouldInformUserIfCellIsUnavailable() {
-        emptyGameBoardArray.get(0).set(0, 'X');
+        emptyGameBoardArray.set(0, 'X');
 
         assertFalse(emptyBoard.isCellAvailable(1));
+    }
+
+    @Test
+    public void shouldGetTheSpecifiedCell() {
+        emptyBoard.markCell(1, 'O');
+        assertEquals(new Character('O'), emptyBoard.getCell(1));
     }
 }

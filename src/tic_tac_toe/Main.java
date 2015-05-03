@@ -18,11 +18,7 @@ public class Main {
         game.start();
     }
 
-    private static ArrayList<ArrayList<Character>> initializeEmptyBoard() {
-        ArrayList<ArrayList<Character>> gameBoard = new ArrayList<>(3);
-        for (ArrayList<Character> row : gameBoard) {
-            row = new ArrayList<>(Collections.nCopies(3, ' '));
-        }
-        return gameBoard;
+    private static ArrayList<Character> initializeEmptyBoard() {
+        return new ArrayList<>(Collections.nCopies(9, ' '));
     }
 }
