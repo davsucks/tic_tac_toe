@@ -21,9 +21,11 @@ public class Game {
 
     public void start() {
         printStream.println(board.buildBoard());
-        playerOne.takeTurn();
-        printStream.println(board.buildBoard());
-        playerTwo.takeTurn();
-        printStream.println(board.buildBoard());
+        while(!board.isFull()) {
+            playerOne.takeTurn();
+            printStream.println(board.buildBoard());
+            playerTwo.takeTurn();
+            printStream.println(board.buildBoard());
+        }
     }
 }

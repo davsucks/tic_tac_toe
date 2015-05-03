@@ -75,6 +75,11 @@ public class GameTest {
 
     @Test
     public void shouldAlternatePlayersUntilBoardIsFull() {
+        when(board.isFull()).thenReturn(false, false, true);
 
+        game.start();
+
+        verify(playerOne, times(2)).takeTurn();
+        verify(playerTwo, times(2)).takeTurn();
     }
 }
